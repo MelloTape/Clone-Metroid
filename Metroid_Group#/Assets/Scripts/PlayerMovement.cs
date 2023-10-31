@@ -36,10 +36,28 @@ public class PlayerMovement : MonoBehaviour
             transform.position += Vector3.right * speed * Time.deltaTime;
         }
 
-        if (Input.GetKey("space"))
+        spaceJump();
+    }
+
+    public void spaceJump()
+    {
+        //Raycast detecting if player isGrounded or not
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.down), out hit, 1.5f))
+        {
+            isGrounded = true;
+            Debug.Log("Player is grounded");
+        }
+        else
+        {
+            isGrounded = false;
+            Debug.Log("Player is not grounded");
+        }
+
+        //Player is able to jump with the "space" key and if isGrounded is true
+        if (Input.GetKeyDown("space") && isGrounded == true)
         {
             rigidBody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
         }
     }
-
 }
