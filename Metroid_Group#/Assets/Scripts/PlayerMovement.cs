@@ -132,7 +132,12 @@ public class PlayerMovement : MonoBehaviour
             Respawn();
         }
 
-        
+        if (other.gameObject.tag == "Portal")
+        {
+            //Teleports the player to the Portal's teleport point, then setting the player's start position to the teleport point so that the player respawns at the new start position
+            transform.position = other.GetComponent<Portal>().teleportPoint.transform.position;
+            startPos = other.GetComponent<Portal>().teleportPoint.transform.position;
+        }
 
         if (other.gameObject.tag == "Laser")
         {
