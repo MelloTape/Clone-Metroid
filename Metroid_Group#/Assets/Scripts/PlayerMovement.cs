@@ -13,6 +13,8 @@ public class PlayerMovement : MonoBehaviour
 {
     public int lives = 3;
 
+    public int health = 99;
+
     public int totalCoins = 0;
 
     public float speed = 10f;
