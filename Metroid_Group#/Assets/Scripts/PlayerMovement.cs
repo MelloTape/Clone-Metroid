@@ -132,6 +132,8 @@ public class PlayerMovement : MonoBehaviour
             Respawn();
         }
 
+        
+
         if (other.gameObject.tag == "Laser")
         {
             StartCoroutine(StunPlayer());
