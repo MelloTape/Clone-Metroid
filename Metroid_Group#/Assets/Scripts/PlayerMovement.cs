@@ -55,6 +55,11 @@ public class PlayerMovement : MonoBehaviour
         }
 
         spaceJump();
+
+        if (transform.position.y < deathYlevel)
+        {
+            Respawn();
+        }
     }
 
     public void spaceJump()
@@ -83,17 +88,11 @@ public class PlayerMovement : MonoBehaviour
     {
         if (!isInvincible)
         {
-            //Teleports player to start position and causes player to lose a life
-            lives--;
+            //Teleports player to start position and causes player to lose some health
+            health --;
             transform.position = startPos;
 
             StartCoroutine(SetInvincible());
-
-            if (lives == 0)
-            {
-                SceneManager.LoadScene(1);
-                Debug.Log("Game Ends");
-            }
         }
         else
         {
