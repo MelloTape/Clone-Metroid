@@ -11,6 +11,10 @@ using UnityEngine;
 
 public class Rotate : MonoBehaviour
 {
+    private bool facingRight = true;
+
+    private float horizontal;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -20,15 +24,23 @@ public class Rotate : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        horizontal = Input.GetAxisRaw("Horizontal");
+        turn();
+    }
+
+    private void turn()
+    {
+        if (facingRight && horizontal < 0f || !facingRight && horizontal > 0f)
         {
-            transform.Rotate(Vector3.up * 90);
+            facingRight = !facingRight;
+            Vector3 localScale = transform.localScale;
+            localScale.x *= -1f;
+            transform.localScale = localScale;
         }
 
-        if (Input.GetKey(KeyCode.W))
-        {
-            //transform.forward is the forward direction of an object based on where it's facing
-            transform.position += transform.forward * Time.deltaTime * 5f;
-        }
+        ///if (Input.GetKeyDown(KeyCode.D))
+        //{
+            //transform.Rotate(Vector3.up * 180);
+        //}
     }
 }
