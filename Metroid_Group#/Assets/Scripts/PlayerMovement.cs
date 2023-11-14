@@ -60,6 +60,11 @@ public class PlayerMovement : MonoBehaviour
         {
             Respawn();
         }
+
+        if (health <= 0)
+        {
+            SceneManager.LoadScene(1);
+        }
     }
 
     public void spaceJump()
@@ -89,7 +94,7 @@ public class PlayerMovement : MonoBehaviour
         if (!isInvincible)
         {
             //Teleports player to start position and causes player to lose some health
-            health --;
+            health = health - 10;
             transform.position = startPos;
 
             StartCoroutine(SetInvincible());
@@ -99,6 +104,22 @@ public class PlayerMovement : MonoBehaviour
             Debug.Log("Player is invincible and so doesn't take damage");
         }
         
+    }
+
+    private void Damage()
+    {
+        if (!isInvincible)
+        {
+            //Teleports player to start position and causes player to lose some health
+            health = health - 15;
+
+            StartCoroutine(SetInvincible());
+        }
+        else
+        {
+            Debug.Log("Player is invincible and so doesn't take damage");
+        }
+
     }
 
     private void CheckForDamage()
@@ -128,7 +149,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (other.gameObject.tag == "Enemy")
         {
-            Respawn();
+            Damage();
         }
 
         if (other.gameObject.tag == "Portal")
